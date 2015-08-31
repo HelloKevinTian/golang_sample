@@ -1,0 +1,27 @@
+EquipLoadParams:
+  PlayerID: string
+  EquipId: string
+  HeroId: string
+
+EquipLoadResponse:
+  PlayerID: string
+  EquipId: string
+  Level: uint32
+
+EquipUnLoadParams:
+  PlayerID: string
+  EquipId: string
+  HeroId: string
+
+EquipUnLoadResponse:
+  PlayerID: string
+  EquipId: string
+  Level: uint32
+
+LoginResponse:
+  Uuid: string
+  Level: uint32
+  Exp: float32
+  Equips: array-EquipLoadResponse
+  Friends: array-string
+  Ages: array-int32
