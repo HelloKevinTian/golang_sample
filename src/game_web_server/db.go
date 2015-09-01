@@ -1,12 +1,20 @@
-package main
+package game_web_server
 
 import (
-	"flag"
-	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"time"
 )
 
+/*
+	使用方法
+		var pool *redis.Pool
+ 		pool = newPool(":6379")
+ 		conn := pool.Get()
+ 		defer conn.Close()
+ 		size, _ := redis.Int(conn.Do("DBSIZE"))
+		print("db size is:", size)
+
+*/
 func newPool(server string) *redis.Pool {
 	return &redis.Pool{
 		MaxIdle:     3,
@@ -23,20 +31,4 @@ func newPool(server string) *redis.Pool {
 			return err
 		},
 	}
-}
-
-var (
-	pool        *redis.Pool
-	redisServer = flag.String("redisServer", ":6379", "")
-)
-
-func main() {
-	flag.Parse()
-	fmt.Println("redisServer:", *redisServer)
-	pool = newPool(*redisServer)
-	conn := pool.Get()
-	defer conn.Close()
-
-	size, _ := redis.Int(conn.Do("DBSIZE"))
-	fmt.Println("db size is:", size)
 }
