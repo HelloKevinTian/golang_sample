@@ -38,13 +38,13 @@ func Start(server, dbserver string) {
 		// })
 
 		// log 记录请求完成前后  (*译者注: 很巧妙，掌声鼓励.)
-		m.Use(func(c martini.Context, log *log.Logger) {
-			log.Println("before a request")
+		// m.Use(func(c martini.Context, log *log.Logger) {
+		// 	log.Println("before a request")
 
-			c.Next()
+		// 	c.Next()
 
-			log.Println("after a request")
-		})
+		// 	log.Println("after a request")
+		// })
 
 		//==============================路由===============================
 		m.Get("/", func(r render.Render) {

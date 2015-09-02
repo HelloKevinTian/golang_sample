@@ -8,15 +8,15 @@ import (
 	"net/http"
 )
 
-type BaseJsonBean struct {
-	Code    int         `json:"code"`
-	Data    interface{} `json:"data"`
-	Message string      `json:"message"`
-}
+// type BaseJsonBean struct {
+// 	Code    int         `json:"code"`
+// 	Data    interface{} `json:"data"`
+// 	Message string      `json:"message"`
+// }
 
-func NewBaseJsonBean() *BaseJsonBean {
-	return &BaseJsonBean{}
-}
+// func NewBaseJsonBean() *BaseJsonBean {
+// 	return &BaseJsonBean{}
+// }
 
 func loginHandle(w http.ResponseWriter, req *http.Request, r render.Render) {
 	conn := pool.Get()
@@ -31,7 +31,7 @@ func loginHandle(w http.ResponseWriter, req *http.Request, r render.Render) {
 		return
 	}
 
-	result := NewBaseJsonBean()
+	// result := NewBaseJsonBean()
 	username := param_username[0]
 	password := param_password[0]
 
@@ -41,20 +41,21 @@ func loginHandle(w http.ResponseWriter, req *http.Request, r render.Render) {
 	pass, _ := redis.String(conn.Do("hget", "h_user", username))
 
 	if pass == password {
-		result.Code = 100
-		result.Message = "登录成功"
+		// result.Code = 100
+		// result.Message = "登录成功"
 
 		arr := []string{"baoma", "aodi", "benchi", "cc"}
 		ma1 := map[string]string{"name": "kevin", "age": "25"}
 		ma2 := map[string]string{"name": "joe", "age": "33"}
 		ma3 := map[string]string{"name": "lucy", "age": "21"}
-		map_arr := []map[string]string{ma1, ma2, ma3}
-		grid := map[string]interface{}{"arr": arr, "map_arr": map_arr}
+		var map_arr []map[string]string
+		map_slice := append(map_arr, ma1, ma2, ma3)
+		grid := map[string]interface{}{"arr": arr, "map_arr": map_slice}
 		r.HTML(200, "index", grid)
 		// r.Redirect("hello", 200)
 	} else {
-		result.Code = 101
-		result.Message = "用户名或密码不正确"
+		// result.Code = 101
+		// result.Message = "用户名或密码不正确"
 		r.HTML(200, "login", "game web server by go")
 	}
 
