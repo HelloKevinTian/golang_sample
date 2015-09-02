@@ -43,7 +43,14 @@ func loginHandle(w http.ResponseWriter, req *http.Request, r render.Render) {
 	if pass == password {
 		result.Code = 100
 		result.Message = "登录成功"
-		r.HTML(200, "index", "login ok")
+
+		arr := []string{"baoma", "aodi", "benchi", "cc"}
+		ma1 := map[string]string{"name": "kevin", "age": "25"}
+		ma2 := map[string]string{"name": "joe", "age": "33"}
+		ma3 := map[string]string{"name": "lucy", "age": "21"}
+		map_arr := []map[string]string{ma1, ma2, ma3}
+		grid := map[string]interface{}{"arr": arr, "map_arr": map_arr}
+		r.HTML(200, "index", grid)
 		// r.Redirect("hello", 200)
 	} else {
 		result.Code = 101
