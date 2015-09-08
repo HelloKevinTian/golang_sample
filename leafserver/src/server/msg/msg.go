@@ -10,14 +10,32 @@ var (
 	ProtobufProcessor = protobuf.NewProcessor()
 )
 
-// 一个结构体定义了一个 JSON 消息的格式
-// 消息名为 Hello
-type Hello struct {
-	Name string
+func init() {
+	JSONProcessor.Register(&S2C_Close{})
+	JSONProcessor.Register(&C2S_Auth{})
+	JSONProcessor.Register(&S2C_Auth{})
 }
 
-func init() {
-	// 这里我们注册了一个 JSON 消息 Hello
-	// 我们也可以使用 ProtobufProcessor 注册 protobuf 消息（同时注意修改配置文件 conf/conf.go 中的 Encoding）
-	JSONProcessor.Register(&Hello{})
+// Close
+const (
+	S2C_Close_LoginRepeated = 1
+	S2C_Close_InnerError    = 2
+)
+
+type S2C_Close struct {
+	Err int
+}
+
+// Auth
+type C2S_Auth struct {
+	AccID string
+}
+
+const (
+	S2C_Auth_OK           = 0
+	S2C_Auth_AccIDInvalid = 1
+)
+
+type S2C_Auth struct {
+	Err int
 }

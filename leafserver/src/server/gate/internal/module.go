@@ -13,7 +13,6 @@ type Module struct {
 }
 
 func (m *Module) OnInit() {
-	log.Release("Init TCP server with config: %v", conf.Server)
 	m.TCPGate = &gate.TCPGate{
 		Addr:            conf.Server.Addr,
 		MaxConnNum:      conf.Server.MaxConnNum,

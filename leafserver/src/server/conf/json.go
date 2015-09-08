@@ -7,10 +7,12 @@ import (
 )
 
 var Server struct {
-	LogLevel   string
-	LogPath    string
-	Addr       string
-	MaxConnNum int
+	LogLevel     string
+	LogPath      string
+	Addr         string
+	MaxConnNum   int
+	DBUrl        string
+	DBMaxConnNum int
 }
 
 func init() {

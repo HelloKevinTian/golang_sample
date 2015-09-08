@@ -35,7 +35,6 @@ func Init() {
 	}
 
 	for i := 0; i < len(mods); i++ {
-		mods[i].wg.Add(1) //@kevin
 		go run(mods[i])
 	}
 }
@@ -50,7 +49,7 @@ func Destroy() {
 }
 
 func run(m *module) {
-	// m.wg.Add(1) //@kevin 按照官网规定移动到了38行
+	m.wg.Add(1)
 	m.mi.Run(m.closeSig)
 	m.wg.Done()
 }
